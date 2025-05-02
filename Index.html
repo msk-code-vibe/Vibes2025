@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibe Website</title>
+    <style>
+        :root {
+            --primary: #6b48ff;
+            --secondary: #1e1e2e;
+            --accent: #ff7edb;
+            --text: #f8f8f2;
+            --background: #282a36;
+        }
+        
+        .shakespeare-quote {
+            background-color: var(--secondary);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            border-radius: 4px;
+            position: relative;
+        }
+        
+        .shakespeare-quote p {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .shakespeare-quote cite {
+            display: block;
+            text-align: right;
+            font-size: 0.9rem;
+            color: var(--accent);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 2rem 1rem;
+            background-color: var(--secondary);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.2;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 1rem;
+            background-color: var(--secondary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin: 0 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            min-height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--secondary), var(--background));
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px rgba(107, 72, 255, 0.5);
+            }
+            to {
+                text-shadow: 0 0 20px rgba(107, 72, 255, 0.8), 0 0 30px rgba(255, 126, 219, 0.6);
+            }
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .feature-card {
+            background-color: var(--secondary);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .cta {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .cta .btn {
+            background-color: var(--accent);
+        }
+
+        .cta .btn:hover {
+            background-color: var(--text);
+            color: var(--secondary);
+        }
+
+        footer {
+            background-color: var(--secondary);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text);
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav a {
+                margin: 0.5rem 0;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Animation for background */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+        }
+
+        #blob1 {
+            width: 200px;
+            height: 200px;
+            background-color: var(--primary);
+            top: -100px;
+            left: 10%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        #blob2 {
+            width: 300px;
+            height: 300px;
+            background-color: var(--accent);
+            bottom: -150px;
+            right: 15%;
+            animation: float 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(10deg);
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="background-animation">
+            <div class="blob" id="blob1"></div>
+            <div class="blob" id="blob2"></div>
+        </div>
+        <div class="header-content">
+            <h1>Your Vibe Website</h1>
+        </div>
+    </header>
+    
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    
+    <section class="hero" id="home">
+        <h1>Create Amazing Experiences</h1>
+        <p>This is your space to express yourself, share your vision, and connect with others. Join us on a journey of creativity and innovation.</p>
+        <a href="#features" class="btn">Explore More</a>
+        
+        <div class="shakespeare-quote fade-in">
+            <p id="quote-text">Loading Shakespeare's wisdom...</p>
+            <cite id="quote-source">William Shakespeare</cite>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="feature-card fade-in">
+            <div class="feature-icon">✨</div>
+            <h2>Creative Design</h2>
+            <p>Stunning visuals and smooth animations that catch the eye and create a memorable experience.</p>
+        </div>
+        
+        <div class="feature-card fade-in">
+            <div class="feature-icon">🚀</div>
+            <h2>Lightning Fast</h2>
+            <p>Optimized performance to ensure your site loads quickly and runs smoothly on all devices.</p>
+        </div>
+        
+        <div class="feature-card fade-in">
+            <div class="feature-icon">📱</div>
+            <h2>Fully Responsive</h2>
+            <p>Looks great on desktop, tablet, and mobile devices. No compromises.</p>
+        </div>
+    </section>
+    
+    <section class="cta" id="about">
+        <h2>Ready to Start Your Journey?</h2>
+        <p>Join thousands of creators who have already taken the leap.</p>
+        <a href="#contact" class="btn">Get Started</a>
+    </section>
+    
+    <section class="contact-form" id="contact" style="padding: 4rem 2rem; background-color: var(--background);">
+        <h2 style="text-align: center; margin-bottom: 2rem;">Get In Touch</h2>
+        <form style="max-width: 600px; margin: 0 auto; display: grid; gap: 1.5rem;">
+            <div>
+                <label for="name" style="display: block; margin-bottom: 0.5rem;">Name</label>
+                <input type="text" id="name" style="width: 100%; padding: 0.8rem; background-color: var(--secondary); border: 1px solid #444; border-radius: 4px; color: var(--text);">
+            </div>
+            <div>
+                <label for="email" style="display: block; margin-bottom: 0.5rem;">Email</label>
+                <input type="email" id="email" style="width: 100%; padding: 0.8rem; background-color: var(--secondary); border: 1px solid #444; border-radius: 4px; color: var(--text);">
+            </div>
+            <div>
+                <label for="message" style="display: block; margin-bottom: 0.5rem;">Message</label>
+                <textarea id="message" rows="5" style="width: 100%; padding: 0.8rem; background-color: var(--secondary); border: 1px solid #444; border-radius: 4px; color: var(--text);"></textarea>
+            </div>
+            <button type="submit" class="btn" style="justify-self: start;">Send Message</button>
+        </form>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Vibe Website. All rights reserved.</p>
+        <div class="social-links">
+            <a href="#" aria-label="Twitter">𝕏</a>
+            <a href="#" aria-label="Instagram">📸</a>
+            <a href="#" aria-label="LinkedIn">💼</a>
+            <a href="#" aria-label="GitHub">💻</a>
+        </div>
+    </footer>
+
+    <script>
+        // Shakespeare quotes and sonnets array
+        const shakespeareContent = [
+            {
+                text: "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take arms against a sea of troubles And by opposing end them.",
+                source: "Hamlet"
+            },
+            {
+                text: "All the world's a stage, and all the men and women merely players. They have their exits and their entrances; And one man in his time plays many parts.",
+                source: "As You Like It"
+            },
+            {
+                text: "The fool doth think he is wise, but the wise man knows himself to be a fool.",
+                source: "As You Like It"
+            },
+            {
+                text: "Love looks not with the eyes, but with the mind, And therefore is winged Cupid painted blind.",
+                source: "A Midsummer Night's Dream"
+            },
+            {
+                text: "Shall I compare thee to a summer's day? Thou art more lovely and more temperate.",
+                source: "Sonnet 18"
+            },
+            {
+                text: "The course of true love never did run smooth.",
+                source: "A Midsummer Night's Dream"
+            },
+            {
+                text: "Some are born great, some achieve greatness, and some have greatness thrust upon them.",
+                source: "Twelfth Night"
+            },
+            {
+                text: "If music be the food of love, play on, Give me excess of it; that surfeiting, The appetite may sicken, and so die.",
+                source: "Twelfth Night"
+            },
+            {
+                text: "We are such stuff as dreams are made on, and our little life is rounded with a sleep.",
+                source: "The Tempest"
+            },
+            {
+                text: "There is nothing either good or bad, but thinking makes it so.",
+                source: "Hamlet"
+            },
+            {
+                text: "What's in a name? That which we call a rose by any other name would smell as sweet.",
+                source: "Romeo and Juliet"
+            },
+            {
+                text: "Love all, trust a few, do wrong to none.",
+                source: "All's Well That Ends Well"
+            },
+            {
+                text: "Let me not to the marriage of true minds admit impediments. Love is not love which alters when it alteration finds.",
+                source: "Sonnet 116"
+            },
+            {
+                text: "The evil that men do lives after them; The good is oft interred with their bones.",
+                source: "Julius Caesar"
+            },
+            {
+                text: "This above all: to thine own self be true, And it must follow, as the night the day, Thou canst not then be false to any man.",
+                source: "Hamlet"
+            },
+            {
+                text: "Life's but a walking shadow, a poor player, that struts and frets his hour upon the stage, and then is heard no more.",
+                source: "Macbeth"
+            },
+            {
+                text: "The better part of valor is discretion.",
+                source: "Henry IV, Part 1"
+            },
+            {
+                text: "Our doubts are traitors, and make us lose the good we oft might win, by fearing to attempt.",
+                source: "Measure for Measure"
+            },
+            {
+                text: "How far that little candle throws his beams! So shines a good deed in a weary world.",
+                source: "The Merchant of Venice"
+            },
+            {
+                text: "They do not love that do not show their love.",
+                source: "The Two Gentlemen of Verona"
+            }
+        ];
+
+        // Function to display a random Shakespeare quote
+        function displayRandomQuote() {
+            const quoteText = document.getElementById('quote-text');
+            const quoteSource = document.getElementById('quote-source');
+            
+            // Get a random quote
+            const randomIndex = Math.floor(Math.random() * shakespeareContent.length);
+            const randomQuote = shakespeareContent[randomIndex];
+            
+            // Update the quote content
+            quoteText.textContent = randomQuote.text;
+            quoteSource.textContent = randomQuote.source + " - William Shakespeare";
+        }
+
+        // Display a random quote when the page loads
+        window.addEventListener('load', displayRandomQuote);
+
+        // Scroll animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+        });
+    </script>
